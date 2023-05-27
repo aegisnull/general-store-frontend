@@ -14,10 +14,6 @@ const links = [
     link: "/contact",
     label: "Contact Us",
   },
-  {
-    link: "/login",
-    label: "Login",
-  },
 ];
 
 export default function Home() {

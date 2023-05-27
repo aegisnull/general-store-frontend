@@ -1,9 +1,11 @@
-//import styles from "./Header.module.scss";
+import styles from "./Header.module.scss";
 
 import { useState } from "react";
 import {
   createStyles,
   Header,
+  Button,
+  ActionIcon,
   Container,
   Group,
   Burger,
@@ -13,6 +15,7 @@ import {
 } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import { MantineLogo } from "@mantine/ds";
+import { IconShoppingCart } from "@tabler/icons-react";
 
 const HEADER_HEIGHT = rem(60);
 
@@ -97,6 +100,7 @@ const useStyles = createStyles((theme) => ({
 
 export default function HeaderResponsive({ links }) {
   const [opened, { toggle, close }] = useDisclosure(false);
+  const [loginOpened, { loginOpen, loginClose }] = useDisclosure(false);
   const [active, setActive] = useState(links[0].link);
   const { classes, cx } = useStyles();
 
@@ -139,6 +143,14 @@ export default function HeaderResponsive({ links }) {
             </Paper>
           )}
         </Transition>
+        <div className={styles.header__shop}>
+          <ActionIcon size="xl" radius="xl" href="/cart" color="blue">
+            <IconShoppingCart size={26} />
+          </ActionIcon>
+          <Button variant="outline" color="blue">
+            Login
+          </Button>
+        </div>
       </Container>
     </Header>
   );
