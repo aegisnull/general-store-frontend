@@ -11,6 +11,7 @@ import {
   Burger,
   Paper,
   Transition,
+  Badge,
   rem,
 } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
@@ -123,6 +124,9 @@ export default function HeaderResponsive({ links }) {
     </a>
   ));
 
+  // Dummy shopping cart count
+  const cartCount = 0;
+
   return (
     <Header height={HEADER_HEIGHT} className={classes.root}>
       <Container className={classes.header}>
@@ -148,7 +152,11 @@ export default function HeaderResponsive({ links }) {
         <div className={styles.header__shop}>
           <ActionIcon size="xl" radius="xl" href="/cart" color="blue">
             <IconShoppingCart size={26} />
+            <Badge color="red" size="xs" position="top-right">
+              {cartCount}
+            </Badge>
           </ActionIcon>
+
           <Button variant="outline" color="blue">
             Login
           </Button>
