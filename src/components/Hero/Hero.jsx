@@ -14,7 +14,7 @@ const useStyles = createStyles((theme) => ({
     paddingTop: rem(180),
     paddingBottom: rem(130),
     backgroundImage:
-      "url(https://images.unsplash.com/photo-1573164713988-8665fc963095?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=980&q=80)",
+      "url(https://cdn.shopify.com/s/files/1/0611/1205/8023/files/slide.png?v=1664266310&width=3000)",
     backgroundSize: "cover",
     backgroundPosition: "center",
 
@@ -103,33 +103,25 @@ export default function HeroImageBackground() {
 
   return (
     <div className={classes.wrapper}>
-      <Overlay color="#000" opacity={0.65} zIndex={1} />
+      <Overlay color="#000" opacity={0.45} zIndex={1} />
 
       <div className={classes.inner}>
         <Title className={classes.title}>
-          Automated AI code reviews for{" "}
+          Unleash your inner{" "}
           <Text component="span" inherit className={classes.highlight}>
-            any stack
+            Barista
           </Text>
         </Title>
 
         <Container size={640}>
           <Text size="lg" className={classes.description}>
-            Build more reliable software with AI companion. AI is also trained
-            to detect lazy developers who do nothing and just complain on
-            Twitter.
+            Master the Art of Coffee Brewing with Our Exceptional Products
           </Text>
         </Container>
 
         <div className={classes.controls}>
           <Button className={classes.control} variant="white" size="lg">
-            Get started
-          </Button>
-          <Button
-            className={cx(classes.control, classes.secondaryControl)}
-            size="lg"
-          >
-            Live demo
+            Shop now
           </Button>
         </div>
       </div>
