@@ -1,6 +1,7 @@
 import Head from "next/head";
 import Hero from "@/components/Hero/Hero";
 import Features from "@/components/Features/Features";
+import ProductDisplay from "@/components/ProductDisplay/ProductDisplay";
 
 export default function Home() {
   return (
@@ -17,6 +18,7 @@ export default function Home() {
       <main>
         <Hero />
         <Features />
+        <ProductDisplay />
       </main>
     </>
   );
