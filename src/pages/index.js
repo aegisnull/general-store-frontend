@@ -1,22 +1,6 @@
 import Head from "next/head";
-import Header from "@/components/Header/Header";
 import Hero from "@/components/Hero/Hero";
-import Footer from "@/components/Footer/Footer";
-
-const links = [
-  {
-    link: "/shop",
-    label: "Shop",
-  },
-  {
-    link: "/about",
-    label: "About",
-  },
-  {
-    link: "/contact",
-    label: "Contact Us",
-  },
-];
+import Features from "@/components/Features/Features";
 
 export default function Home() {
   return (
@@ -28,9 +12,8 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main>
-        <Header links={links} />
         <Hero />
-        <Footer />
+        <Features />
       </main>
     </>
   );
