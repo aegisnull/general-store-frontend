@@ -1,5 +1,6 @@
 import Head from "next/head";
 import Header from "@/components/Header/Header";
+import Hero from "@/components/Hero/Hero";
 
 const links = [
   {
@@ -27,6 +28,7 @@ export default function Home() {
       </Head>
       <main>
         <Header links={links} />
+        <Hero />
       </main>
     </>
   );
