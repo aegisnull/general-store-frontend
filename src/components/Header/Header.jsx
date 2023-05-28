@@ -11,6 +11,8 @@ import {
   Burger,
   Paper,
   Transition,
+  Modal,
+  TextInput,
   Badge,
   rem,
 } from "@mantine/core";
@@ -109,6 +111,16 @@ export default function HeaderResponsive({ links }) {
   const { classes, cx } = useStyles();
   const [isCartOpen, setCartOpen] = useState(false);
 
+  // Modal state and handlers
+  const [isLoginModalOpen, setLoginModalOpen] = useState(false);
+  const [isSignupModalOpen, setSignupModalOpen] = useState(false);
+
+  const openLoginModal = () => setLoginModalOpen(true);
+  const closeLoginModal = () => setLoginModalOpen(false);
+
+  const openSignupModal = () => setSignupModalOpen(true);
+  const closeSignupModal = () => setSignupModalOpen(false);
+
   const items = links.map((link) => (
     <a
       key={link.label}
@@ -170,14 +182,84 @@ export default function HeaderResponsive({ links }) {
             </Badge>
           </ActionIcon>
 
-          <Button variant="outline" color="blue">
+          {/* Open the login modal on login button click */}
+          <Button variant="outline" color="blue" onClick={openLoginModal}>
             Login
           </Button>
         </div>
+        {/* Pass isCartOpen and onClose prop */}
         <ShoppingCartSidebar
           isOpen={isCartOpen}
           onClose={() => setCartOpen(false)}
         />
+        {/* Modal component for login/signup */}
+        <Modal
+          opened={isLoginModalOpen || isSignupModalOpen}
+          onClose={isLoginModalOpen ? closeLoginModal : closeSignupModal}
+          title={isLoginModalOpen ? "Login" : "Sign Up"}
+          size="xs"
+          hideCloseButton
+        >
+          {/* Add your login/signup form or content here */}
+          <div style={{ marginBottom: "1rem" }}>
+            <TextInput label="Email" placeholder="Enter your email" />
+          </div>
+          <div style={{ marginBottom: "1rem" }}>
+            <TextInput
+              label="Password"
+              placeholder="Enter your password"
+              type="password"
+            />
+          </div>
+          <Button variant="outline" color="blue">
+            {isLoginModalOpen ? "Sign In" : "Sign Up"}
+          </Button>
+          {/* Link to toggle between login and signup forms */}
+          <p
+            style={{
+              marginTop: "1rem",
+              textAlign: "center",
+              margin: ".3rem",
+              fontSize: "0.8rem",
+            }}
+          >
+            {isLoginModalOpen ? (
+              <>
+                Don't have an account?{" "}
+                <Button
+                  variant="link"
+                  color="blue"
+                  style={{
+                    fontSize: "0.8rem",
+                  }}
+                  onClick={() => {
+                    closeLoginModal();
+                    openSignupModal();
+                  }}
+                >
+                  Sign Up
+                </Button>
+              </>
+            ) : (
+              <>
+                Already have an account?{" "}
+                <Button
+                  variant="link"
+                  color="blue"
+                  style={{
+                    fontSize: "0.8rem",
+                  }}
+                  onClick={() => {
+                    closeSignupModal();
+                    openLoginModal();
+                  }}
+                >
+                  Login
+                </Button>
+              </>
+            )}
+          </p>
+        </Modal>
       </Container>
     </Header>
   );
