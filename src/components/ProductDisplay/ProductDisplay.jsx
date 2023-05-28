@@ -1,5 +1,5 @@
 import styles from "./ProductDisplay.module.scss";
-import { Grid, Container } from "@mantine/core";
+import { Grid, Container, Group } from "@mantine/core";
 import ProductCard from "../ProductCard/ProductCard";
 
 export default function ProductDisplay() {
@@ -19,30 +19,30 @@ export default function ProductDisplay() {
       isNew: false,
     },
     {
-      name: "Robusta Coffee",
+      name: "Arabica Coffee",
       image:
         "https://cdn.shopify.com/s/files/1/0674/3411/9456/products/shop-4.png?v=1675661896&width=720",
       price: 14.99,
       isNew: false,
     },
     {
-      name: "Colombian Dark Roast",
+      name: "Black Tea",
       image:
-        "https://cdn.shopify.com/s/files/1/0674/3411/9456/products/shop-8.png?v=1675662787&width=720",
+        "https://cdn.shopify.com/s/files/1/0566/9965/0230/files/img-4_720x_680bc1c2-2c6d-4b9d-81dd-55808867b5ed.png?v=1640174980",
       price: 12.99,
       isNew: false,
     },
     {
-      name: "Ethiopian Yirgacheffe",
+      name: "Craft Beans",
       image:
-        "https://cdn.shopify.com/s/files/1/0674/3411/9456/products/shop-7.png?v=1675662588&width=720",
+        "https://dt-cafeley.myshopify.com/cdn/shop/files/specification.png?v=1665815885&width=275",
       price: 14.99,
       isNew: false,
     },
     {
       name: "Robusta Coffee",
       image:
-        "https://cdn.shopify.com/s/files/1/0674/3411/9456/products/shop-4.png?v=1675661896&width=720",
+        "https://cdn.shopify.com/s/files/1/1815/2235/products/5lb_1000x.png?v=1584727129",
       price: 14.99,
       isNew: false,
     },
@@ -55,7 +55,9 @@ export default function ProductDisplay() {
 
   return (
     <div>
-      <h2>Our Products</h2>
+      <Group position="center">
+        <h2>Our Products</h2>
+      </Group>
       <Container size="s">
         <Grid className={styles.productGrid}>
           {products.map((product) => (
