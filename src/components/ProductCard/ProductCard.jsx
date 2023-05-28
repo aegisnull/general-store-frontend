@@ -1,4 +1,5 @@
-import { Card, Image, Badge, Text, Button } from "@mantine/core";
+import React from "react";
+import { Card, Image, Text, Button, Badge, Grid } from "@mantine/core";
 
 export default function ProductCard({
   name,
@@ -8,8 +9,13 @@ export default function ProductCard({
   onAddToCart,
 }) {
   return (
-    <Card shadow="xs" padding="lg">
-      <div style={{ position: "relative" }}>
+    <Card
+      shadow="sm"
+      padding="lg"
+      radius="lg"
+      style={{ height: "100%", maxWidth: 300 }}
+    >
+      <div style={{ position: "relative", marginBottom: "1rem" }}>
         {isNew && (
           <Badge
             position="top-right"
@@ -23,8 +29,8 @@ export default function ProductCard({
         <Image
           src={image}
           alt={name}
-          height={180}
-          fit="cover"
+          height={200}
+          fit="contain"
           radius="md"
           shadow="sm"
         />
@@ -33,7 +39,7 @@ export default function ProductCard({
         {name}
       </Text>
       <Text size="sm" style={{ marginTop: "0.5rem" }}>
-        ${price}
+        ${price.toFixed(2)}
       </Text>
       <Button
         fullWidth

@@ -17,7 +17,7 @@ export default function Home() {
       </Head>
       <main>
         <Hero />
-        <Features />
+
         <ProductDisplay />
       </main>
     </>
