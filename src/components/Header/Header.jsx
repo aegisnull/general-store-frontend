@@ -17,6 +17,7 @@ import {
 import { useDisclosure } from "@mantine/hooks";
 import { MantineLogo } from "@mantine/ds";
 import { IconShoppingCart } from "@tabler/icons-react";
+import ShoppingCartSidebar from "../ShoppingCart/ShoppingCart";
 
 const HEADER_HEIGHT = rem(60);
 
@@ -106,6 +107,7 @@ export default function HeaderResponsive({ links }) {
   const [loginOpened, { loginOpen, loginClose }] = useDisclosure(false);
   const [active, setActive] = useState(links[0].link);
   const { classes, cx } = useStyles();
+  const [isCartOpen, setCartOpen] = useState(false);
 
   const items = links.map((link) => (
     <a
@@ -126,6 +128,11 @@ export default function HeaderResponsive({ links }) {
 
   // Dummy shopping cart count
   const cartCount = 0;
+
+  // Manage shopping cart open/close
+  const handleCartToggle = () => {
+    setCartOpen(!isCartOpen);
+  };
 
   return (
     <Header height={HEADER_HEIGHT} className={classes.root}>
@@ -150,7 +157,13 @@ export default function HeaderResponsive({ links }) {
           )}
         </Transition>
         <div className={styles.header__shop}>
-          <ActionIcon size="xl" radius="xl" href="/cart" color="blue">
+          <ActionIcon
+            size="xl"
+            radius="xl"
+            href="/cart"
+            color="blue"
+            onClick={handleCartToggle}
+          >
             <IconShoppingCart size={26} />
             <Badge color="red" size="xs" position="top-right">
               {cartCount}
@@ -161,6 +174,10 @@ export default function HeaderResponsive({ links }) {
             Login
           </Button>
         </div>
+        <ShoppingCartSidebar
+          isOpen={isCartOpen}
+          onClose={() => setCartOpen(false)}
+        />
       </Container>
     </Header>
   );
