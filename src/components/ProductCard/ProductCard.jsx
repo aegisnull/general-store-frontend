@@ -8,6 +8,15 @@ export default function ProductCard({
   isNew,
   onAddToCart,
 }) {
+  const handleAddToCart = () => {
+    const item = {
+      name,
+      image,
+      price,
+    };
+    onAddToCart(item);
+  };
+
   return (
     <Card
       shadow="sm"
@@ -46,7 +55,7 @@ export default function ProductCard({
         variant="outline"
         color="blue"
         style={{ marginTop: "1rem" }}
-        onClick={onAddToCart}
+        onClick={handleAddToCart}
       >
         Add to Cart
       </Button>

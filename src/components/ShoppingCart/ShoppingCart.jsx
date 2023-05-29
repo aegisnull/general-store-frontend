@@ -10,9 +10,7 @@ import {
 } from "@mantine/core";
 import { IconShoppingCart, IconTrash } from "@tabler/icons-react";
 
-export default function ShoppingCartSidebar({ isOpen, onClose }) {
-  const [cartItems, setCartItems] = useState([]);
-
+export default function ShoppingCartSidebar({ isOpen, onClose, cartItems }) {
   const handleRemoveItem = (itemName) => {
     setCartItems((prevItems) =>
       prevItems.filter((item) => item.name !== itemName)
@@ -47,7 +45,7 @@ export default function ShoppingCartSidebar({ isOpen, onClose }) {
                 <div>
                   <Text>{item.name}</Text>
                   <Text size="sm" color="dimmed">
-                    ${item.price}
+                    ${item.price.toFixed(2)}
                   </Text>
                 </div>
                 <Button

@@ -106,10 +106,15 @@ const useStyles = createStyles((theme) => ({
 
 export default function HeaderResponsive({ links }) {
   const [opened, { toggle, close }] = useDisclosure(false);
-  const [loginOpened, { loginOpen, loginClose }] = useDisclosure(false);
   const [active, setActive] = useState(links[0].link);
   const { classes, cx } = useStyles();
   const [isCartOpen, setCartOpen] = useState(false);
+
+  const [cartItems, setCartItems] = useState([]); // State for shopping cart items
+
+  const handleAddToCart = (item) => {
+    setCartItems((prevItems) => [...prevItems, item]);
+  };
 
   // Modal state and handlers
   const [isLoginModalOpen, setLoginModalOpen] = useState(false);
@@ -139,7 +144,7 @@ export default function HeaderResponsive({ links }) {
   ));
 
   // Dummy shopping cart count
-  const cartCount = 0;
+  const cartCount = cartItems.length;
 
   // Manage shopping cart open/close
   const handleCartToggle = () => {
@@ -191,6 +196,7 @@ export default function HeaderResponsive({ links }) {
         <ShoppingCartSidebar
           isOpen={isCartOpen}
           onClose={() => setCartOpen(false)}
+          items={cartItems}
         />
         {/* Modal component for login/signup */}
         <Modal

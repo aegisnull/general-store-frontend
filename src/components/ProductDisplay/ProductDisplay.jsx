@@ -1,8 +1,11 @@
+import React, { useState } from "react";
 import styles from "./ProductDisplay.module.scss";
 import { Grid, Container, Group } from "@mantine/core";
 import ProductCard from "../ProductCard/ProductCard";
+import ShoppingCartSidebar from "../ShoppingCart/ShoppingCart";
 
 export default function ProductDisplay() {
+  const [cartItems, setCartItems] = useState([]);
   const products = [
     {
       name: "Colombian Dark Roast",
@@ -48,9 +51,8 @@ export default function ProductDisplay() {
     },
   ];
 
-  const handleAddToCart = (productName) => {
-    // Handle adding the product to the cart
-    console.log(`Added ${productName} to the cart`);
+  const handleAddToCart = (product) => {
+    setCartItems((prevItems) => [...prevItems, product]);
   };
 
   return (
@@ -67,11 +69,16 @@ export default function ProductDisplay() {
               image={product.image}
               price={product.price}
               isNew={product.isNew}
-              onAddToCart={() => handleAddToCart(product.name)}
+              onAddToCart={() => handleAddToCart(product)}
             />
           ))}
         </Grid>
       </Container>
+      <ShoppingCartSidebar
+        isOpen={isShoppingCartOpen}
+        onClose={closeShoppingCart}
+        cartItems={cartItems}
+      />
     </div>
   );
 }
