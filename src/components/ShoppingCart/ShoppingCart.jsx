@@ -52,6 +52,14 @@ export default function ShoppingCartSidebar({
     });
   }
 
+  // Calculate the total items in the cart and total price
+  const totalItems = cartItems
+    ? Object.values(cartItemCounts).reduce((acc, count) => acc + count, 0)
+    : 0;
+  const totalPrice = cartItems
+    ? cartItems.reduce((acc, item) => acc + item.price, 0)
+    : 0;
+
   return (
     <Drawer
       opened={isOpen}
@@ -140,6 +148,13 @@ export default function ShoppingCartSidebar({
           })
         )}
         <Divider />
+
+        <Text style={{ fontWeight: "bold" }}>
+          Total items in cart: {totalItems}
+        </Text>
+        <Text style={{ fontWeight: "bold" }}>
+          Total price: ${totalPrice.toFixed(2)}
+        </Text>
 
         <Button fullWidth variant="outline" color="blue">
           Checkout
