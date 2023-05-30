@@ -11,23 +11,6 @@ import {
 import { IconShoppingCart, IconTrash } from "@tabler/icons-react";
 
 export default function ShoppingCartSidebar({ isOpen, toggleCart, cartItems }) {
-  /* const cartItems = [
-    {
-      name: "Colombian Dark Roast",
-      image:
-        "https://cdn.shopify.com/s/files/1/0674/3411/9456/products/shop-8.png?v=1675662787&width=720",
-      price: 12.99,
-      isNew: false,
-    },
-    {
-      name: "Ethiopian Yirgacheffe",
-      image:
-        "https://cdn.shopify.com/s/files/1/0674/3411/9456/products/shop-7.png?v=1675662588&width=720",
-      price: 14.99,
-      isNew: false,
-    },
-  ]; */
-
   return (
     <Drawer
       opened={isOpen}
