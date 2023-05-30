@@ -6,6 +6,7 @@ import {
   Text,
   Divider,
   Button,
+  Modal,
   Paper,
 } from "@mantine/core";
 import {
@@ -21,10 +22,13 @@ export default function ShoppingCartSidebar({
   cartItems,
   setCartItems,
 }) {
-  const handleRemoveItem = (itemName) => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [itemName, setItemName] = useState("");
+  const handleRemoveItem = () => {
     setCartItems((prevItems) =>
       prevItems.filter((item) => item.name !== itemName)
     );
+    setIsModalOpen(false);
   };
 
   const handleDecreaseCount = (itemName) => {
@@ -89,7 +93,10 @@ export default function ShoppingCartSidebar({
                       color="red"
                       size="xs"
                       style={{ marginRight: "0.5rem" }}
-                      onClick={() => handleRemoveItem(itemName)}
+                      onClick={() => {
+                        setItemName(itemName);
+                        setIsModalOpen(true);
+                      }}
                     >
                       <IconTrash size={18} />
                     </Button>
@@ -125,6 +132,27 @@ export default function ShoppingCartSidebar({
           Checkout
         </Button>
       </Group>
+      <Modal
+        opened={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        title="Confirm Delete"
+        size="sm"
+      >
+        <Text>Are you sure you want to remove this item from your cart?</Text>
+        <Group align="right" mt="lg">
+          <Button
+            variant="outline"
+            color="gray"
+            onClick={() => setIsModalOpen(false)}
+            style={{ marginRight: "0.5rem" }}
+          >
+            Cancel
+          </Button>
+          <Button variant="filled" color="red" onClick={handleRemoveItem}>
+            Delete
+          </Button>
+        </Group>
+      </Modal>
     </Drawer>
   );
 }
