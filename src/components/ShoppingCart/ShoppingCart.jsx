@@ -75,13 +75,24 @@ export default function ShoppingCartSidebar({
             const item = cartItems.find((item) => item.name === itemName);
 
             return (
-              <Paper key={itemName} padding="md" shadow="sm">
-                <div style={{ display: "flex", alignItems: "center" }}>
+              <Paper
+                key={itemName}
+                padding="md"
+                shadow="sm"
+                style={{ marginBottom: "0.5rem", borderRadius: "0.5rem" }}
+              >
+                <div
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    marginBottom: "0.5rem",
+                  }}
+                >
                   <IconShoppingCart
                     size={20}
                     style={{ marginRight: "0.5rem" }}
                   />
-                  <div style={{ flex: 1 }}>
+                  <div style={{ flex: 1, marginRight: "0.5rem" }}>
                     <Text>{itemName}</Text>
                     <Text size="sm" color="dimmed">
                       ${item.price.toFixed(2)}
@@ -90,22 +101,11 @@ export default function ShoppingCartSidebar({
                   <div style={{ display: "flex", alignItems: "center" }}>
                     <Button
                       variant="outline"
-                      color="red"
-                      size="xs"
-                      style={{ marginRight: "0.5rem" }}
-                      onClick={() => {
-                        setItemName(itemName);
-                        setIsModalOpen(true);
-                      }}
-                    >
-                      <IconTrash size={18} />
-                    </Button>
-                    <Button
-                      variant="outline"
                       color="gray"
                       size="xs"
                       onClick={() => handleDecreaseCount(itemName)}
                       disabled={itemQuantity === 1}
+                      style={{ marginRight: "0.5rem" }}
                     >
                       <IconMinus size={16} />
                     </Button>
@@ -117,8 +117,21 @@ export default function ShoppingCartSidebar({
                       color="gray"
                       size="xs"
                       onClick={() => handleIncreaseCount(itemName)}
+                      style={{ marginRight: "0.5rem" }}
                     >
                       <IconPlus size={16} />
+                    </Button>
+                    <Button
+                      variant="outline"
+                      color="red"
+                      size="xs"
+                      style={{ marginRight: "0.5rem" }}
+                      onClick={() => {
+                        setItemName(itemName);
+                        setIsModalOpen(true);
+                      }}
+                    >
+                      <IconTrash size={18} />
                     </Button>
                   </div>
                 </div>
