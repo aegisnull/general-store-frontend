@@ -8,9 +8,46 @@ import {
   Button,
   Paper,
 } from "@mantine/core";
-import { IconShoppingCart, IconTrash } from "@tabler/icons-react";
+import {
+  IconShoppingCart,
+  IconTrash,
+  IconMinus,
+  IconPlus,
+} from "@tabler/icons-react";
 
-export default function ShoppingCartSidebar({ isOpen, toggleCart, cartItems }) {
+export default function ShoppingCartSidebar({
+  isOpen,
+  toggleCart,
+  cartItems,
+  setCartItems,
+}) {
+  const handleRemoveItem = (itemName) => {
+    setCartItems((prevItems) =>
+      prevItems.filter((item) => item.name !== itemName)
+    );
+  };
+
+  const handleDecreaseCount = (itemName) => {
+    // Decrease item count logic goes here
+  };
+
+  const handleIncreaseCount = (itemName) => {
+    // Increase item count logic goes here
+  };
+
+  const cartItemCounts = {}; // Object to store item counts
+
+  // Calculate the quantity of each item in the cart
+  if (cartItems) {
+    cartItems.forEach((item) => {
+      if (cartItemCounts[item.name]) {
+        cartItemCounts[item.name] += 1;
+      } else {
+        cartItemCounts[item.name] = 1;
+      }
+    });
+  }
+
   return (
     <Drawer
       opened={isOpen}
@@ -29,28 +66,58 @@ export default function ShoppingCartSidebar({ isOpen, toggleCart, cartItems }) {
             Your cart is empty
           </Text>
         ) : (
-          cartItems.map((item) => (
-            <Paper key={item.name} padding="md">
-              <div style={{ display: "flex", alignItems: "center" }}>
-                <IconShoppingCart size={20} style={{ marginRight: "0.5rem" }} />
-                <div>
-                  <Text>{item.name}</Text>
-                  <Text size="sm" color="dimmed">
-                    ${item.price.toFixed(2)}
-                  </Text>
+          Object.keys(cartItemCounts).map((itemName) => {
+            const itemQuantity = cartItemCounts[itemName];
+            const item = cartItems.find((item) => item.name === itemName);
+
+            return (
+              <Paper key={itemName} padding="md" shadow="sm">
+                <div style={{ display: "flex", alignItems: "center" }}>
+                  <IconShoppingCart
+                    size={20}
+                    style={{ marginRight: "0.5rem" }}
+                  />
+                  <div style={{ flex: 1 }}>
+                    <Text>{itemName}</Text>
+                    <Text size="sm" color="dimmed">
+                      ${item.price.toFixed(2)}
+                    </Text>
+                  </div>
+                  <div style={{ display: "flex", alignItems: "center" }}>
+                    <Button
+                      variant="outline"
+                      color="red"
+                      size="xs"
+                      style={{ marginRight: "0.5rem" }}
+                      onClick={() => handleRemoveItem(itemName)}
+                    >
+                      <IconTrash size={18} />
+                    </Button>
+                    <Button
+                      variant="outline"
+                      color="gray"
+                      size="xs"
+                      onClick={() => handleDecreaseCount(itemName)}
+                      disabled={itemQuantity === 1}
+                    >
+                      <IconMinus size={16} />
+                    </Button>
+                    <Text size="sm" style={{ margin: "0 0.5rem" }}>
+                      {itemQuantity}
+                    </Text>
+                    <Button
+                      variant="outline"
+                      color="gray"
+                      size="xs"
+                      onClick={() => handleIncreaseCount(itemName)}
+                    >
+                      <IconPlus size={16} />
+                    </Button>
+                  </div>
                 </div>
-                <Button
-                  variant="outline"
-                  color="red"
-                  size="xs"
-                  style={{ marginLeft: "auto" }}
-                  onClick={() => handleRemoveItem(item.name)}
-                >
-                  <IconTrash size={18} />
-                </Button>
-              </div>
-            </Paper>
-          ))
+              </Paper>
+            );
+          })
         )}
         <Divider />
 

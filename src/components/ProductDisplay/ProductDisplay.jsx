@@ -83,6 +83,7 @@ export default function ProductDisplay({
         isOpen={isCartOpen}
         cartItems={cartItems}
         toggleCart={toggleCart}
+        setCartItems={setCartItems}
       />
     </div>
   );
