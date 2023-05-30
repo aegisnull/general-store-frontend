@@ -88,9 +88,14 @@ export default function ShoppingCartSidebar({
                     marginBottom: "0.5rem",
                   }}
                 >
-                  <IconShoppingCart
-                    size={20}
-                    style={{ marginRight: "0.5rem" }}
+                  <img
+                    src={item.image}
+                    alt={item.name}
+                    style={{
+                      width: "60px",
+                      height: "60px",
+                      marginRight: "0.5rem",
+                    }}
                   />
                   <div style={{ flex: 1, marginRight: "0.5rem" }}>
                     <Text>{itemName}</Text>
