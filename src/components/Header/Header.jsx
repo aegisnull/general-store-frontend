@@ -104,17 +104,10 @@ const useStyles = createStyles((theme) => ({
   },
 }));
 
-export default function HeaderResponsive({ links }) {
+export default function HeaderResponsive({ links, cartItems }) {
   const [opened, { toggle, close }] = useDisclosure(false);
   const [active, setActive] = useState(links[0].link);
   const { classes, cx } = useStyles();
-  const [isCartOpen, setCartOpen] = useState(false);
-
-  const [cartItems, setCartItems] = useState([]); // State for shopping cart items
-
-  const handleAddToCart = (item) => {
-    setCartItems((prevItems) => [...prevItems, item]);
-  };
 
   // Modal state and handlers
   const [isLoginModalOpen, setLoginModalOpen] = useState(false);
@@ -144,7 +137,7 @@ export default function HeaderResponsive({ links }) {
   ));
 
   // Dummy shopping cart count
-  const cartCount = cartItems.length;
+  const cartCount = 0;
 
   // Manage shopping cart open/close
   const handleCartToggle = () => {
@@ -182,9 +175,11 @@ export default function HeaderResponsive({ links }) {
             onClick={handleCartToggle}
           >
             <IconShoppingCart size={26} />
-            <Badge color="red" size="xs" position="top-right">
-              {cartCount}
-            </Badge>
+            {cartItems === undefined ? null : (
+              <Badge color="red" size="xs" position="top-right">
+                {cartItems.length}
+              </Badge>
+            )}
           </ActionIcon>
 
           {/* Open the login modal on login button click */}
@@ -193,18 +188,13 @@ export default function HeaderResponsive({ links }) {
           </Button>
         </div>
         {/* Pass isCartOpen and onClose prop */}
-        <ShoppingCartSidebar
-          isOpen={isCartOpen}
-          onClose={() => setCartOpen(false)}
-          items={cartItems}
-        />
+        <ShoppingCartSidebar />
         {/* Modal component for login/signup */}
         <Modal
           opened={isLoginModalOpen || isSignupModalOpen}
           onClose={isLoginModalOpen ? closeLoginModal : closeSignupModal}
           title={isLoginModalOpen ? "Login" : "Sign Up"}
           size="xs"
-          hideCloseButton
         >
           {/* Add your login/signup form or content here */}
           <div style={{ marginBottom: "1rem" }}>

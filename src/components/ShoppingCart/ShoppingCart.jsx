@@ -10,30 +10,38 @@ import {
 } from "@mantine/core";
 import { IconShoppingCart, IconTrash } from "@tabler/icons-react";
 
-export default function ShoppingCartSidebar({ isOpen, onClose, cartItems }) {
-  const handleRemoveItem = (itemName) => {
-    setCartItems((prevItems) =>
-      prevItems.filter((item) => item.name !== itemName)
-    );
-  };
+export default function ShoppingCartSidebar({ isOpen, toggleCart, cartItems }) {
+  /* const cartItems = [
+    {
+      name: "Colombian Dark Roast",
+      image:
+        "https://cdn.shopify.com/s/files/1/0674/3411/9456/products/shop-8.png?v=1675662787&width=720",
+      price: 12.99,
+      isNew: false,
+    },
+    {
+      name: "Ethiopian Yirgacheffe",
+      image:
+        "https://cdn.shopify.com/s/files/1/0674/3411/9456/products/shop-7.png?v=1675662588&width=720",
+      price: 14.99,
+      isNew: false,
+    },
+  ]; */
 
   return (
     <Drawer
       opened={isOpen}
-      onClose={onClose}
+      onClose={toggleCart}
       size="md"
       padding="xl"
       position="right"
-      transition="rotate-left"
-      transitionDuration={200}
     >
       <Group direction="column" spacing="lg">
         <Title order={4} style={{ marginBottom: 0 }}>
           Shopping Cart
         </Title>
         <Divider />
-
-        {cartItems.length === 0 ? (
+        {cartItems === undefined ? (
           <Text align="center" size="sm" color="dimmed">
             Your cart is empty
           </Text>
@@ -52,15 +60,15 @@ export default function ShoppingCartSidebar({ isOpen, onClose, cartItems }) {
                   variant="outline"
                   color="red"
                   size="xs"
-                  icon={<IconTrash />}
                   style={{ marginLeft: "auto" }}
                   onClick={() => handleRemoveItem(item.name)}
-                />
+                >
+                  <IconTrash size={18} />
+                </Button>
               </div>
             </Paper>
           ))
         )}
-
         <Divider />
 
         <Button fullWidth variant="outline" color="blue">

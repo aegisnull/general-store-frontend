@@ -4,8 +4,17 @@ import { Grid, Container, Group } from "@mantine/core";
 import ProductCard from "../ProductCard/ProductCard";
 import ShoppingCartSidebar from "../ShoppingCart/ShoppingCart";
 
-export default function ProductDisplay() {
-  const [cartItems, setCartItems] = useState([]);
+export default function ProductDisplay({
+  cartItems,
+  isCartOpen,
+  setCartItems,
+  toggleCart,
+}) {
+  const handleAddToCart = (product) => {
+    setCartItems((currentCartItems) => [...currentCartItems, product]);
+    toggleCart();
+  };
+
   const products = [
     {
       name: "Colombian Dark Roast",
@@ -51,10 +60,6 @@ export default function ProductDisplay() {
     },
   ];
 
-  const handleAddToCart = (product) => {
-    setCartItems((prevItems) => [...prevItems, product]);
-  };
-
   return (
     <div>
       <Group position="center">
@@ -75,9 +80,9 @@ export default function ProductDisplay() {
         </Grid>
       </Container>
       <ShoppingCartSidebar
-        isOpen={isShoppingCartOpen}
-        onClose={closeShoppingCart}
+        isOpen={isCartOpen}
         cartItems={cartItems}
+        toggleCart={toggleCart}
       />
     </div>
   );

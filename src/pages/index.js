@@ -2,8 +2,16 @@ import Head from "next/head";
 import Hero from "@/components/Hero/Hero";
 import Features from "@/components/Features/Features";
 import ProductDisplay from "@/components/ProductDisplay/ProductDisplay";
+import { useState } from "react";
 
 export default function Home() {
+  const [cartItems, setCartItems] = useState([]);
+  const [isCartOpen, setCartOpen] = useState(false);
+
+  function toggleCart() {
+    setCartOpen(!isCartOpen);
+  }
+
   return (
     <>
       <Head>
@@ -16,9 +24,14 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main>
-        <Hero />
+        <Hero cartItems={cartItems} />
         <Features />
-        <ProductDisplay />
+        <ProductDisplay
+          cartItems={cartItems}
+          setCartItems={setCartItems}
+          isCartOpen={isCartOpen}
+          toggleCart={toggleCart}
+        />
       </main>
     </>
   );
