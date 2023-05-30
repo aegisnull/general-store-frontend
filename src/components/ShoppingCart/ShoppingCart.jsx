@@ -75,12 +75,7 @@ export default function ShoppingCartSidebar({
             const item = cartItems.find((item) => item.name === itemName);
 
             return (
-              <Paper
-                key={itemName}
-                padding="md"
-                shadow="sm"
-                style={{ marginBottom: "0.5rem", borderRadius: "0.5rem" }}
-              >
+              <Paper key={itemName} style={{ marginBottom: "0.5rem" }}>
                 <div
                   style={{
                     display: "flex",
