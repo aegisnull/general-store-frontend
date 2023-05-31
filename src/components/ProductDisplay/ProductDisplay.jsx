@@ -1,15 +1,13 @@
-import React, { useState } from "react";
+import React, { useContext } from "react";
 import styles from "./ProductDisplay.module.scss";
 import { Grid, Container, Group } from "@mantine/core";
 import ProductCard from "../ProductCard/ProductCard";
 import ShoppingCartSidebar from "../ShoppingCart/ShoppingCart";
+import { CartContext } from "@/contexts/CartContext";
 
-export default function ProductDisplay({
-  cartItems,
-  isCartOpen,
-  setCartItems,
-  toggleCart,
-}) {
+export default function ProductDisplay({ isCartOpen, toggleCart }) {
+  const { cartItems, setCartItems } = useContext(CartContext);
+
   const handleAddToCart = (product) => {
     setCartItems((currentCartItems) => [...currentCartItems, product]);
     toggleCart();
@@ -79,12 +77,7 @@ export default function ProductDisplay({
           ))}
         </Grid>
       </Container>
-      <ShoppingCartSidebar
-        isOpen={isCartOpen}
-        cartItems={cartItems}
-        toggleCart={toggleCart}
-        setCartItems={setCartItems}
-      />
+      <ShoppingCartSidebar isOpen={isCartOpen} toggleCart={toggleCart} />
     </div>
   );
 }

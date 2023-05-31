@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import {
   Drawer,
   Group,
@@ -9,26 +9,17 @@ import {
   Modal,
   Paper,
 } from "@mantine/core";
-import {
-  IconShoppingCart,
-  IconTrash,
-  IconMinus,
-  IconPlus,
-} from "@tabler/icons-react";
+import { IconTrash, IconMinus, IconPlus } from "@tabler/icons-react";
 import Link from "next/link";
+import { CartContext } from "@/contexts/CartContext";
 
-export default function ShoppingCartSidebar({
-  isOpen,
-  toggleCart,
-  cartItems,
-  setCartItems,
-}) {
+export default function ShoppingCartSidebar({ isOpen, toggleCart }) {
+  const { cartItems, removeFromCart } = useContext(CartContext);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [itemName, setItemName] = useState("");
+
   const handleRemoveItem = () => {
-    setCartItems((prevItems) =>
-      prevItems.filter((item) => item.name !== itemName)
-    );
+    removeFromCart(itemName);
     setIsModalOpen(false);
   };
 

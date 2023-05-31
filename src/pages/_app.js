@@ -1,5 +1,6 @@
 import "@/styles/globals.css";
 import { MantineProvider } from "@mantine/core";
+import { CartProvider } from "@/contexts/CartContext";
 import Layout from "@/components/Layout/Layout";
 
 export default function App({ Component, pageProps }) {
@@ -12,9 +13,11 @@ export default function App({ Component, pageProps }) {
           colorScheme: "dark",
         }}
       >
-        <Layout>
-          <Component {...pageProps} />
-        </Layout>
+        <CartProvider>
+          <Layout>
+            <Component {...pageProps} />
+          </Layout>
+        </CartProvider>
       </MantineProvider>
     </>
   );
