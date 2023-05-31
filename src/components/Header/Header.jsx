@@ -1,5 +1,6 @@
 import styles from "./Header.module.scss";
 
+import { useContext } from "react";
 import { useState } from "react";
 import {
   createStyles,
@@ -20,6 +21,8 @@ import { useDisclosure } from "@mantine/hooks";
 import { MantineLogo } from "@mantine/ds";
 import { IconShoppingCart } from "@tabler/icons-react";
 import ShoppingCartSidebar from "../ShoppingCart/ShoppingCart";
+import { CartContext } from "../../contexts/CartContext";
+import Link from "next/link";
 
 const HEADER_HEIGHT = rem(60);
 
@@ -104,7 +107,8 @@ const useStyles = createStyles((theme) => ({
   },
 }));
 
-export default function HeaderResponsive({ links, cartItems }) {
+export default function HeaderResponsive({ links }) {
+  const { cartItems } = useContext(CartContext);
   const [opened, { toggle, close }] = useDisclosure(false);
   const [active, setActive] = useState(links[0].link);
   const { classes, cx } = useStyles();
@@ -120,34 +124,31 @@ export default function HeaderResponsive({ links, cartItems }) {
   const closeSignupModal = () => setSignupModalOpen(false);
 
   const items = links.map((link) => (
-    <a
-      key={link.label}
+    <Link
       href={link.link}
+      key={link.label}
       className={cx(classes.link, {
         [classes.linkActive]: active === link.link,
       })}
-      onClick={(event) => {
-        event.preventDefault();
+      onClick={() => {
         setActive(link.link);
         close();
       }}
     >
       {link.label}
-    </a>
+    </Link>
   ));
 
-  // Dummy shopping cart count
-  const cartCount = 0;
-
-  // Manage shopping cart open/close
   const handleCartToggle = () => {
-    setCartOpen(!isCartOpen);
+    toggle();
   };
 
   return (
     <Header height={HEADER_HEIGHT} className={classes.root}>
       <Container className={classes.header}>
-        <MantineLogo size={28} />
+        <Link href="/">
+          <MantineLogo size={28} />
+        </Link>
         <Group spacing={5} className={classes.links}>
           {items}
         </Group>
@@ -170,9 +171,9 @@ export default function HeaderResponsive({ links, cartItems }) {
           <ActionIcon
             size="xl"
             radius="xl"
-            href="/cart"
-            color="blue"
             onClick={handleCartToggle}
+            color="blue"
+            aria-label="Open Shopping Cart"
           >
             <IconShoppingCart size={26} />
             {cartItems === undefined ? null : (
@@ -188,7 +189,7 @@ export default function HeaderResponsive({ links, cartItems }) {
           </Button>
         </div>
         {/* Pass isCartOpen and onClose prop */}
-        <ShoppingCartSidebar />
+        <ShoppingCartSidebar isOpen={opened} toggleCart={handleCartToggle} />
         {/* Modal component for login/signup */}
         <Modal
           opened={isLoginModalOpen || isSignupModalOpen}

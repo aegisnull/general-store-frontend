@@ -5,7 +5,7 @@ import Footer from "../Footer/Footer";
 
 const links = [
   {
-    link: "/shop",
+    link: "/",
     label: "Shop",
   },
   {

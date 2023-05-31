@@ -5,6 +5,7 @@ import {
   IconBrandInstagram,
 } from "@tabler/icons-react";
 import { MantineLogo } from "@mantine/ds";
+import Link from "next/link";
 
 const useStyles = createStyles((theme) => ({
   footer: {
@@ -39,7 +40,9 @@ export default function FooterSocial() {
   return (
     <div className={classes.footer}>
       <Container className={classes.inner}>
-        <MantineLogo size={28} />
+        <Link href="/">
+          <MantineLogo size={28} />
+        </Link>
         <Group spacing={0} className={classes.links} position="right" noWrap>
           <ActionIcon size="lg">
             <IconBrandTwitter size="1.05rem" stroke={1.5} />
