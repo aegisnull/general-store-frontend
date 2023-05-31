@@ -15,6 +15,7 @@ import {
   IconMinus,
   IconPlus,
 } from "@tabler/icons-react";
+import Link from "next/link";
 
 export default function ShoppingCartSidebar({
   isOpen,
@@ -156,9 +157,11 @@ export default function ShoppingCartSidebar({
           Total price: ${totalPrice.toFixed(2)}
         </Text>
 
-        <Button fullWidth variant="outline" color="blue">
-          Checkout
-        </Button>
+        <Link href="/checkout">
+          <Button fullWidth variant="outline" color="blue">
+            Checkout
+          </Button>
+        </Link>
       </Group>
       <Modal
         opened={isModalOpen}
