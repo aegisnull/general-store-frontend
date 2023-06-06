@@ -222,7 +222,7 @@ export default function HeaderResponsive({ links }) {
           >
             {isLoginModalOpen ? (
               <>
-                Don't have an account?{" "}
+                Don&apos;t have an account?{" "}
                 <Button
                   variant="link"
                   color="blue"
