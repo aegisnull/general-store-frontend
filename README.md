@@ -61,10 +61,10 @@ npm run cypress
 
 ## Repository 📂
 
-- 📁 [Frontend]("https://github.com/aegisnull/general-store-frontend")
-- 📁 [Backend]("https://github.com/aegisnull/general-store-backend")
+- 📁 [Frontend](https://github.com/aegisnull/general-store-frontend)
+- 📁 [Backend](https://github.com/aegisnull/general-store-backend)
 
 ## Demo 🌐
 
-- [Frontend]("https://general-store-frontend.vercel.app/")
-- [Backend]("https://general-store-backend-production-62ab.up.railway.app/")
+- [Frontend](https://general-store-frontend.vercel.app/)
+- [Backend](https://general-store-backend-production-62ab.up.railway.app/)
