@@ -2,7 +2,6 @@
 
 ![Demo](https://github.com/aegisnull/general-store-frontend/assets/27663011/cc56cc35-abc1-41da-93ea-66070441bc31)
 
-
 This is a general store web application built with Next.js, Mantine UI, Jest, React Testing Library, Cypress, and MongoDB Atlas. The application is divided into an administration section and a customer section. The admin can manage the product inventory, while the customer can view products, add them to the shopping cart, and checkout.
 
 ## Requirements ✅
@@ -71,3 +70,11 @@ npm run cypress
 
 - [Frontend](https://store-frontend-aegisnull.vercel.app)
 - [Backend](https://general-store-backend-production-62ab.up.railway.app/)
+
+## Contributors 🤝
+
+This project was created by Luis Tellez.
+
+- [GitHub](https://github.com/aegisnull)
+
+- [LinkedIn](https://www.linkedin.com/in/luistellezv/)
