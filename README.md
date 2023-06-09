@@ -66,5 +66,5 @@ npm run cypress
 
 ## Demo 🌐
 
-- [Frontend](https://general-store-frontend.vercel.app/)
+- [Frontend](https://store-frontend-aegisnull.vercel.app)
 - [Backend](https://general-store-backend-production-62ab.up.railway.app/)
