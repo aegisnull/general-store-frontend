@@ -9,6 +9,7 @@
     "lint": "next lint",
     "format": "prettier --write 'src/**/*.{js,jsx,css,scss}'",
     "test": "jest --watch",
+    "testCoverage": "jest --coverage",
     "e2e": "cypress open"
   },
   "dependencies": {
