@@ -61,6 +61,23 @@ npm run test
 npm run cypress
 ```
 
+### Coverage 📊
+
+The testing coverage is as follows:
+
+Global: 43.83%
+
+- components/Features: 100%
+- components/Hero: 100%
+- components/ProductCard: 33.33%
+- components/ProductDisplay: 57.69%
+- components/ShoppingCart: 11.11%
+
+- contexts/CartContext: 26.66%
+
+- pages/checkout: 51.61%
+- pages/index: 88.88%
+
 ## Repository 📂
 
 - 📁 [Frontend](https://github.com/aegisnull/general-store-frontend)
