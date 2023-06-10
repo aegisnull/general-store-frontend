@@ -1,43 +1,32 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useEffect, useContext, useState } from "react";
 import styles from "./ProductDisplay.module.scss";
 import { Grid, Container, Group } from "@mantine/core";
 import ProductCard from "../ProductCard/ProductCard";
 import ShoppingCartSidebar from "../ShoppingCart/ShoppingCart";
+import { getProducts } from "@/api/products";
 import { CartContext } from "@/contexts/CartContext";
 
 export default function ProductDisplay({ isCartOpen, toggleCart }) {
-  const { cartItems, setCartItems } = useContext(CartContext);
+  const { addToCart } = useContext(CartContext);
   const [products, setProducts] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
 
   useEffect(() => {
-    fetch(
-      "https://general-store-backend-production-62ab.up.railway.app/products"
-    )
-      .then((response) => response.json())
-      .then((data) => {
-        setProducts(data.products);
-        setLoading(false);
-      })
-      .catch((error) => {
-        setError(error);
-        setLoading(false);
-      });
+    const fetchData = async () => {
+      try {
+        const products = await getProducts();
+        setProducts(products);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    fetchData();
   }, []);
 
   const handleAddToCart = (product) => {
-    setCartItems((currentCartItems) => [...currentCartItems, product]);
+    addToCart(product);
     toggleCart();
   };
-
-  if (loading) {
-    return <div>Loading products...</div>;
-  }
-
-  if (error) {
-    return <div>Error fetching products: {error.message}</div>;
-  }
 
   return (
     <div id="products">
