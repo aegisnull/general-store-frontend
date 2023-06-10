@@ -14,22 +14,38 @@ import Link from "next/link";
 import { CartContext } from "@/contexts/CartContext";
 
 export default function ShoppingCartSidebar({ isOpen, toggleCart }) {
-  const { cartItems, removeFromCart } = useContext(CartContext);
+  const { cartItems, setCartItems, removeFromCart } = useContext(CartContext);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [itemName, setItemName] = useState("");
 
-  const handleRemoveItem = () => {
+  function handleRemoveItem() {
     removeFromCart(itemName);
     setIsModalOpen(false);
-  };
+  }
 
-  const handleDecreaseCount = (itemName) => {
-    // Decrease item count logic goes here
-  };
+  function handleDecreaseCount(itemName) {
+    const itemIndex = cartItems.findIndex((item) => item.name === itemName);
 
-  const handleIncreaseCount = (itemName) => {
-    // Increase item count logic goes here
-  };
+    if (itemIndex !== -1) {
+      const updatedCartItems = [...cartItems];
+      if (updatedCartItems[itemIndex].quantity > 1) {
+        updatedCartItems[itemIndex].quantity--;
+      } else {
+        updatedCartItems.splice(itemIndex, 1);
+      }
+      setCartItems(updatedCartItems);
+    }
+  }
+
+  function handleIncreaseCount(itemName) {
+    const itemIndex = cartItems.findIndex((item) => item.name === itemName);
+
+    if (itemIndex !== -1) {
+      const updatedCartItems = [...cartItems];
+      updatedCartItems[itemIndex].quantity++;
+      setCartItems(updatedCartItems);
+    }
+  }
 
   const cartItemCounts = {}; // Object to store item counts
 
