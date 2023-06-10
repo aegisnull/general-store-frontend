@@ -40,7 +40,7 @@ export default function ProductDisplay({ isCartOpen, toggleCart }) {
   }
 
   return (
-    <div>
+    <div id="products">
       <Group position="center">
         <h2>Our Products</h2>
       </Group>

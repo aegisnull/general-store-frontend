@@ -7,6 +7,7 @@ import {
   createStyles,
   rem,
 } from "@mantine/core";
+import Link from "next/link";
 
 const useStyles = createStyles((theme) => ({
   wrapper: {
@@ -120,9 +121,11 @@ export default function HeroImageBackground() {
         </Container>
 
         <div className={classes.controls}>
-          <Button className={classes.control} variant="white" size="lg">
-            Shop now
-          </Button>
+          <Link href="#products">
+            <Button className={classes.control} variant="white" size="lg">
+              Shop now
+            </Button>
+          </Link>
         </div>
       </div>
     </div>
