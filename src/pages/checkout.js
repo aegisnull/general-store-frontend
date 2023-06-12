@@ -2,6 +2,7 @@ import { useContext, useState } from "react";
 import { Text, Button, Paper, Modal, Group, TextInput } from "@mantine/core";
 import { IconTrash } from "@tabler/icons-react";
 import { CartContext } from "@/contexts/CartContext";
+import { createOrder } from "@/api/orders";
 
 export default function Checkout() {
   const { cartItems, setCartItems } = useContext(CartContext);
@@ -26,7 +27,7 @@ export default function Checkout() {
     setIsModalOpen(false);
   };
 
-  const handleCheckout = () => {
+  async function handleCheckout() {
     // Validate the name and address fields
     if (!name || !address) {
       return;
@@ -39,12 +40,16 @@ export default function Checkout() {
       items: cartItems,
     };
 
-    // Reset the shopping cart
-    setCartItems([]);
-
-    // Redirect the user to the store's main page
-    window.location.href = "/";
-  };
+    try {
+      await createOrder(order);
+      // Clear the cart
+      setCartItems([]);
+      // Redirect the user to the store's main page
+      window.location.href = "/";
+    } catch (error) {
+      console.log(error);
+    }
+  }
 
   return (
     <div>
