@@ -13,7 +13,7 @@ import { getProducts, updateProduct } from "@/api/products";
 
 function AdminPage() {
   const [products, setProducts] = useState([]);
-  const [selectedProduct, setSelectedProduct] = useState(null);
+  const [selectedProduct, setSelectedProduct] = useState([]);
   const [editModalOpen, setEditModalOpen] = useState(false);
   const [deleteModalOpen, setDeleteModalOpen] = useState(false);
 
@@ -31,6 +31,15 @@ function AdminPage() {
     fetchProducts();
   }, []);
 
+  async function updateList() {
+    try {
+      const products = await getProducts();
+      setProducts(products);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
   function handleEdit(product) {
     setSelectedProduct(product);
     setEditModalOpen(true);
@@ -41,7 +50,7 @@ function AdminPage() {
     setDeleteModalOpen(true);
   }
 
-  const handleEditSubmit = async (event) => {
+  async function handleEditSubmit(event) {
     event.preventDefault();
 
     const updatedProduct = {
@@ -54,19 +63,14 @@ function AdminPage() {
 
     try {
       await updateProduct(updatedProduct);
-      // Update the products list with the edited product
-      setProducts((prevProducts) =>
-        prevProducts.map((product) =>
-          product._id === updatedProduct._id ? updatedProduct : product
-        )
-      );
       setEditModalOpen(false);
+      updateList();
     } catch (error) {
       console.log(error);
     }
-  };
+  }
 
-  const handleDeleteConfirm = async () => {
+  async function handleDeleteConfirm() {
     try {
       await deleteProduct(selectedProduct._id);
       setProducts((prevProducts) =>
@@ -76,7 +80,7 @@ function AdminPage() {
     } catch (error) {
       console.log(error);
     }
-  };
+  }
 
   return (
     <div style={{ display: "flex", justifyContent: "center" }}>
@@ -183,14 +187,10 @@ function AdminPage() {
           opened={deleteModalOpen}
           onClose={() => setDeleteModalOpen(false)}
         >
-          {selectedProduct && (
-            <div>
-              <Text>
-                Are you sure you want to delete {selectedProduct.name}?
-              </Text>
-              <Button onClick={handleDeleteConfirm}>Delete</Button>
-            </div>
-          )}
+          <div>
+            <Text>Are you sure you want to delete {selectedProduct.name}?</Text>
+            <Button onClick={handleDeleteConfirm}>Delete</Button>
+          </div>
         </Modal>
       </div>
     </div>
