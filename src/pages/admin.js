@@ -94,12 +94,13 @@ function AdminPage() {
       name: event.target.name.value,
       image: event.target.image.value,
       price: event.target.price.value,
+      isNew: false,
       description: event.target.description.value,
     };
 
     try {
-      const addedProduct = await addProduct(newProduct);
-      setProducts((prevProducts) => [...prevProducts, addedProduct]);
+      console.log(newProduct);
+      await addProduct(newProduct);
       setAddModalOpen(false);
       updateList();
     } catch (error) {
@@ -152,7 +153,7 @@ function AdminPage() {
                   {product.name}
                 </Text>
                 <Text size="sm" style={{ marginTop: "0.5rem" }}>
-                  ${product.price.toFixed(2)}
+                  ${product.price ? product.price.toFixed(2) : ""}
                 </Text>
                 <Button
                   fullWidth
