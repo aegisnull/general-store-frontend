@@ -110,6 +110,7 @@ const useStyles = createStyles((theme) => ({
 export default function HeaderResponsive({ links }) {
   const { cartItems } = useContext(CartContext);
   const [opened, { toggle, close }] = useDisclosure(false);
+  const [isCartOpen, setCartOpen] = useState(false); // State to control shopping cart sidebar visibility
   const [active, setActive] = useState(links[0].link);
   const { classes, cx } = useStyles();
 
@@ -140,7 +141,16 @@ export default function HeaderResponsive({ links }) {
   ));
 
   const handleCartToggle = () => {
+    if (!opened) {
+      setCartOpen(!isCartOpen);
+    }
+  };
+
+  const handleMobileToggle = () => {
     toggle();
+    if (isCartOpen) {
+      setCartOpen(false);
+    }
   };
 
   return (
@@ -155,7 +165,7 @@ export default function HeaderResponsive({ links }) {
 
         <Burger
           opened={opened}
-          onClick={toggle}
+          onClick={handleMobileToggle}
           className={classes.burger}
           size="sm"
         />
@@ -187,9 +197,19 @@ export default function HeaderResponsive({ links }) {
           <Button variant="outline" color="blue" onClick={openLoginModal}>
             Login
           </Button>
+          <Group spacing={5} className={classes.links}>
+            <Link href="/admin">
+              <Button variant="outline" color="blue">
+                Admin
+              </Button>
+            </Link>
+          </Group>
         </div>
         {/* Pass isCartOpen and onClose prop */}
-        <ShoppingCartSidebar isOpen={opened} toggleCart={handleCartToggle} />
+        <ShoppingCartSidebar
+          isOpen={isCartOpen}
+          toggleCart={handleCartToggle}
+        />
         {/* Modal component for login/signup */}
         <Modal
           opened={isLoginModalOpen || isSignupModalOpen}
