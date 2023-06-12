@@ -9,7 +9,12 @@ import {
   Grid,
   TextInput,
 } from "@mantine/core";
-import { getProducts, updateProduct, addProduct } from "@/api/products";
+import {
+  getProducts,
+  updateProduct,
+  addProduct,
+  deleteProduct,
+} from "@/api/products";
 
 function AdminPage() {
   const [products, setProducts] = useState([]);
@@ -78,10 +83,8 @@ function AdminPage() {
   async function handleDeleteConfirm() {
     try {
       await deleteProduct(selectedProduct._id);
-      setProducts((prevProducts) =>
-        prevProducts.filter((product) => product._id !== selectedProduct._id)
-      );
       setDeleteModalOpen(false);
+      updateList();
     } catch (error) {
       console.log(error);
     }
