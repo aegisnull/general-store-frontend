@@ -149,37 +149,47 @@ function AdminPage() {
           opened={editModalOpen}
           onClose={() => setEditModalOpen(false)}
         >
-          {selectedProduct && (
-            <form onSubmit={handleEditSubmit}>
-              <TextInput
-                label="Name"
-                name="name"
-                required
-                defaultValue={selectedProduct.name}
-              />
-              <TextInput
-                label="Image URL"
-                name="image"
-                required
-                defaultValue={selectedProduct.image}
-              />
-              <TextInput
-                label="Price"
-                name="price"
-                type="number"
-                required
-                defaultValue={selectedProduct.price}
-              />
-              <TextInput
-                label="Description"
-                name="description"
-                required
-                defaultValue={selectedProduct.description}
-              />
+          <form onSubmit={handleEditSubmit}>
+            <TextInput
+              label="Name"
+              name="name"
+              required
+              defaultValue={selectedProduct.name}
+            />
+            <TextInput
+              label="Image URL"
+              name="image"
+              required
+              defaultValue={selectedProduct.image}
+            />
+            <TextInput
+              label="Price"
+              name="price"
+              type="number"
+              required
+              defaultValue={selectedProduct.price}
+            />
+            <TextInput
+              label="Description"
+              name="description"
+              required
+              defaultValue={selectedProduct.description}
+            />
 
-              <Button type="submit">Save Changes</Button>
-            </form>
-          )}
+            <div style={{ marginTop: "1rem" }}>
+              <h3>Image Preview:</h3>
+              <Image
+                src={selectedProduct.image}
+                alt="Preview"
+                width={100}
+                height={150}
+              />
+            </div>
+
+            <Button type="submit" color="blue" style={{ marginTop: "1rem" }}>
+              Save Changes
+            </Button>
+          </form>
         </Modal>
 
         <Modal
