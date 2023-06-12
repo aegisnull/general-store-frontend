@@ -202,7 +202,6 @@ function AdminPage() {
             <TextInput
               label="Price"
               name="price"
-              type="number"
               required
               defaultValue={selectedProduct.price}
             />
@@ -248,7 +247,7 @@ function AdminPage() {
           <form onSubmit={handleAddSubmit}>
             <TextInput label="Name" name="name" required />
             <TextInput label="Image URL" name="image" required />
-            <TextInput label="Price" name="price" type="number" required />
+            <TextInput label="Price" name="price" required />
             <TextInput label="Description" name="description" required />
 
             <Button type="submit" color="blue" style={{ marginTop: "1rem" }}>
