@@ -9,7 +9,7 @@ import {
   Grid,
   TextInput,
 } from "@mantine/core";
-import { getProducts, updateProduct } from "@/api/products";
+import { getProducts, updateProduct, addProduct } from "@/api/products";
 
 function AdminPage() {
   const [products, setProducts] = useState([]);

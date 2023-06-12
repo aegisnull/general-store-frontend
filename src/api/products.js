@@ -27,3 +27,20 @@ export const updateProduct = async (product) => {
     throw new Error("Failed to update product.");
   }
 };
+
+export const addProduct = async (product) => {
+  try {
+    const response = await fetch(`${SERVER_URL}/products`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(product),
+    });
+    const newProduct = await response.json();
+    return newProduct;
+  } catch (error) {
+    console.log(error);
+    throw new Error("Failed to add product.");
+  }
+};
