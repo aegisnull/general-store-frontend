@@ -1,7 +1,6 @@
 import styles from "./Header.module.scss";
 
-import { useContext } from "react";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import {
   createStyles,
   Header,
@@ -23,6 +22,8 @@ import { IconShoppingCart } from "@tabler/icons-react";
 import ShoppingCartSidebar from "../ShoppingCart/ShoppingCart";
 import { CartContext } from "../../contexts/CartContext";
 import Link from "next/link";
+
+import { login, signup } from "@/api/users";
 
 const HEADER_HEIGHT = rem(60);
 
@@ -118,6 +119,56 @@ export default function HeaderResponsive({ links }) {
   const [isLoginModalOpen, setLoginModalOpen] = useState(false);
   const [isSignupModalOpen, setSignupModalOpen] = useState(false);
 
+  const [loginData, setLoginData] = useState({ email: "", password: "" });
+  const [signupData, setSignupData] = useState({
+    email: "",
+    password: "",
+    name: "",
+  });
+
+  function handleLoginDataChange(event) {
+    const { name, value } = event.target;
+    setLoginData((prevData) => ({ ...prevData, [name]: value }));
+  }
+
+  function handleSignupDataChange(event) {
+    const { name, value } = event.target;
+    setSignupData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
+  }
+
+  async function handleLogin() {
+    try {
+      const user = await login(loginData);
+      console.log("Logged in:", user);
+      // Additional logic for successful login
+    } catch (error) {
+      console.log("Login failed:", error.message);
+      // Additional error handling for failed login
+    }
+  }
+
+  async function handleSignup(email, password, name) {
+    try {
+      const user = await signup(email, password, name);
+      console.log("Signed up:", user);
+      // Additional logic for successful signup
+    } catch (error) {
+      console.log("Signup failed:", error.message);
+      // Additional error handling for failed signup
+    }
+  }
+
+  function toggleLoginModal() {
+    setLoginModalOpen((prev) => !prev);
+  }
+
+  function toggleSignupModal() {
+    setSignupModalOpen((prev) => !prev);
+  }
+
   const openLoginModal = () => setLoginModalOpen(true);
   const closeLoginModal = () => setLoginModalOpen(false);
 
@@ -210,28 +261,35 @@ export default function HeaderResponsive({ links }) {
           isOpen={isCartOpen}
           toggleCart={handleCartToggle}
         />
-        {/* Modal component for login/signup */}
+        {/* Modal component for login */}
         <Modal
-          opened={isLoginModalOpen || isSignupModalOpen}
-          onClose={isLoginModalOpen ? closeLoginModal : closeSignupModal}
-          title={isLoginModalOpen ? "Login" : "Sign Up"}
+          opened={isLoginModalOpen}
+          onClose={closeLoginModal}
+          title="Login"
           size="xs"
         >
-          {/* Add your login/signup form or content here */}
           <div style={{ marginBottom: "1rem" }}>
-            <TextInput label="Email" placeholder="Enter your email" />
+            <TextInput
+              label="Email"
+              placeholder="Enter your email"
+              value={loginData.email}
+              onChange={handleLoginDataChange}
+              name="email"
+            />
           </div>
           <div style={{ marginBottom: "1rem" }}>
             <TextInput
               label="Password"
               placeholder="Enter your password"
               type="password"
+              value={loginData.password}
+              onChange={handleLoginDataChange}
+              name="password"
             />
           </div>
-          <Button variant="outline" color="blue">
-            {isLoginModalOpen ? "Sign In" : "Sign Up"}
+          <Button variant="outline" color="blue" onClick={handleLogin}>
+            Sign In
           </Button>
-          {/* Link to toggle between login and signup forms */}
           <p
             style={{
               marginTop: "1rem",
@@ -240,41 +298,82 @@ export default function HeaderResponsive({ links }) {
               fontSize: "0.8rem",
             }}
           >
-            {isLoginModalOpen ? (
-              <>
-                Don&apos;t have an account?{" "}
-                <Button
-                  variant="link"
-                  color="blue"
-                  style={{
-                    fontSize: "0.8rem",
-                  }}
-                  onClick={() => {
-                    closeLoginModal();
-                    openSignupModal();
-                  }}
-                >
-                  Sign Up
-                </Button>
-              </>
-            ) : (
-              <>
-                Already have an account?{" "}
-                <Button
-                  variant="link"
-                  color="blue"
-                  style={{
-                    fontSize: "0.8rem",
-                  }}
-                  onClick={() => {
-                    closeSignupModal();
-                    openLoginModal();
-                  }}
-                >
-                  Login
-                </Button>
-              </>
-            )}
+            Don&apos;t have an account?{" "}
+            <Button
+              variant="link"
+              color="blue"
+              style={{
+                fontSize: "0.8rem",
+              }}
+              onClick={() => {
+                closeLoginModal();
+                openSignupModal();
+              }}
+            >
+              Sign Up
+            </Button>
+          </p>
+        </Modal>
+        {/* Modal component for signup */}
+        <Modal
+          opened={isSignupModalOpen}
+          onClose={closeSignupModal}
+          title="Sign Up"
+          size="xs"
+        >
+          <div style={{ marginBottom: "1rem" }}>
+            <TextInput
+              label="Email"
+              placeholder="Enter your email"
+              value={signupData.email}
+              onChange={handleSignupDataChange}
+              name="email"
+            />
+          </div>
+          <div style={{ marginBottom: "1rem" }}>
+            <TextInput
+              label="Password"
+              placeholder="Enter your password"
+              type="password"
+              value={signupData.password}
+              onChange={handleSignupDataChange}
+              name="password"
+            />
+          </div>
+          <div style={{ marginBottom: "1rem" }}>
+            <TextInput
+              label="Name"
+              placeholder="Enter your name"
+              value={signupData.name}
+              onChange={handleSignupDataChange}
+              name="name"
+            />
+          </div>
+          <Button variant="outline" color="blue" onClick={handleSignup}>
+            Sign Up
+          </Button>
+          <p
+            style={{
+              marginTop: "1rem",
+              textAlign: "center",
+              margin: ".3rem",
+              fontSize: "0.8rem",
+            }}
+          >
+            Already have an account?{" "}
+            <Button
+              variant="link"
+              color="blue"
+              style={{
+                fontSize: "0.8rem",
+              }}
+              onClick={() => {
+                closeSignupModal();
+                openLoginModal();
+              }}
+            >
+              Login
+            </Button>
           </p>
         </Modal>
       </Container>
