@@ -57,3 +57,14 @@ export const deleteProduct = async (productId) => {
     throw new Error("Failed to delete product.");
   }
 };
+
+export const getProductById = async (productId) => {
+  try {
+    const response = await fetch(`${SERVER_URL}/products/${productId}`);
+    const product = await response.json();
+    return product;
+  } catch (error) {
+    console.log(error);
+    throw new Error("Failed to get product.");
+  }
+}

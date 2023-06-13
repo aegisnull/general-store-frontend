@@ -42,6 +42,7 @@ export default function ProductDisplay({ isCartOpen, toggleCart }) {
               image={product.image}
               price={product.price}
               isNew={product.isNew}
+              productId={product._id}
               onAddToCart={() => handleAddToCart(product)}
             />
           ))}
