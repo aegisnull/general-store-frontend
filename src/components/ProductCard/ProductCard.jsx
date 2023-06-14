@@ -21,7 +21,7 @@ export default function ProductCard({
   }
 
   return (
-    <Link href={`/products/${productId}`}>
+    <Link href={`/shop/${productId}`}>
       <Card
         shadow="sm"
         padding="lg"

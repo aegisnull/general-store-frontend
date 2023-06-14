@@ -67,4 +67,4 @@ export const getProductById = async (productId) => {
     console.log(error);
     throw new Error("Failed to get product.");
   }
-}
+};
