@@ -122,6 +122,7 @@ function AdminPage() {
             color="blue"
             style={{ marginBottom: "1rem" }}
             onClick={handleAddProduct}
+            className="add-product-button"
           >
             Add New Product
           </Button>

@@ -256,7 +256,12 @@ export default function HeaderResponsive({ links }) {
               Logout
             </Button>
           ) : (
-            <Button variant="outline" color="blue" onClick={toggleLoginModal}>
+            <Button
+              variant="outline"
+              color="blue"
+              onClick={toggleLoginModal}
+              className="login-button"
+            >
               Login
             </Button>
           )}

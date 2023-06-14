@@ -4,10 +4,10 @@ describe("Test adding new products via Admin Page", () => {
     cy.visit("https://store-frontend-aegisnull.vercel.app");
 
     // Click on the login button
-    cy.get(".Header_header__shop__S4vQl > .mantine-Button-root").click();
+    cy.get("#mantine-2u5i2eah5").click();
 
     // Clicks on the email input and types in the email
-    cy.get("#mantine-cti2vsm03").type("test@test.com");
+    cy.get(".login-email-input").type("test@test.com");
 
     // Clicks on the password input and types in the password
   });
