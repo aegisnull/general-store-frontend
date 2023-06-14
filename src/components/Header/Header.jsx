@@ -153,8 +153,8 @@ export default function HeaderResponsive({ links }) {
     event.preventDefault();
     try {
       const user = await login(loginData);
-      console.log("Logged in:", user);
       setLoginStatus(true);
+      toggleLoginModal();
     } catch (error) {
       console.log("Login failed:", error.message);
     }
@@ -164,7 +164,8 @@ export default function HeaderResponsive({ links }) {
     event.preventDefault();
     try {
       const user = await signup(signupData);
-      console.log("Signed up:", user);
+      setLoginStatus(true);
+      toggleSignupModal();
     } catch (error) {
       console.log("Signup failed:", error.message);
     }
