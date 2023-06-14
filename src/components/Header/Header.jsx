@@ -21,6 +21,7 @@ import { MantineLogo } from "@mantine/ds";
 import { IconShoppingCart } from "@tabler/icons-react";
 import ShoppingCartSidebar from "../ShoppingCart/ShoppingCart";
 import { CartContext } from "../../contexts/CartContext";
+import { UserContext } from "../../contexts/UserContext";
 import Link from "next/link";
 
 import { login, signup } from "@/api/users";
@@ -119,6 +120,8 @@ export default function HeaderResponsive({ links }) {
   const [isLoginModalOpen, setLoginModalOpen] = useState(false);
   const [isSignupModalOpen, setSignupModalOpen] = useState(false);
 
+  const { loginStatus, setLoginStatus } = useContext(UserContext);
+
   const [loginData, setLoginData] = useState({
     email: "",
     password: "",
@@ -146,25 +149,24 @@ export default function HeaderResponsive({ links }) {
     }));
   }
 
-  async function handleLogin() {
+  async function handleLogin(event) {
+    event.preventDefault();
     try {
       const user = await login(loginData);
       console.log("Logged in:", user);
-      // Additional logic for successful login
+      setLoginStatus(true);
     } catch (error) {
       console.log("Login failed:", error.message);
-      // Additional error handling for failed login
     }
   }
 
-  async function handleSignup(signupData) {
+  async function handleSignup(event) {
+    event.preventDefault();
     try {
       const user = await signup(signupData);
       console.log("Signed up:", user);
-      // Additional logic for successful signup
     } catch (error) {
       console.log("Signup failed:", error.message);
-      // Additional error handling for failed signup
     }
   }
 
@@ -245,16 +247,27 @@ export default function HeaderResponsive({ links }) {
             )}
           </ActionIcon>
 
-          {/* Open the login modal on login button click */}
-          <Button variant="outline" color="blue" onClick={toggleLoginModal}>
-            Login
-          </Button>
+          {loginStatus ? (
+            <Button
+              variant="outline"
+              color="blue"
+              onClick={() => setLoginStatus(false)}
+            >
+              Logout
+            </Button>
+          ) : (
+            <Button variant="outline" color="blue" onClick={toggleLoginModal}>
+              Login
+            </Button>
+          )}
           <Group spacing={5} className={classes.links}>
-            <Link href="/admin">
-              <Button variant="outline" color="blue">
-                Admin
-              </Button>
-            </Link>
+            {loginStatus && (
+              <Link href="/admin">
+                <Button variant="outline" color="blue">
+                  Admin
+                </Button>
+              </Link>
+            )}
           </Group>
         </div>
         {/* Pass isCartOpen and onClose prop */}
@@ -269,28 +282,30 @@ export default function HeaderResponsive({ links }) {
           title="Login"
           size="xs"
         >
-          <div style={{ marginBottom: "1rem" }}>
-            <TextInput
-              label="Email"
-              placeholder="Enter your email"
-              value={loginData.email}
-              onChange={handleLoginDataChange}
-              name="email"
-            />
-          </div>
-          <div style={{ marginBottom: "1rem" }}>
-            <TextInput
-              label="Password"
-              placeholder="Enter your password"
-              type="password"
-              value={loginData.password}
-              onChange={handleLoginDataChange}
-              name="password"
-            />
-          </div>
-          <Button variant="outline" color="blue" onClick={handleLogin}>
-            Sign In
-          </Button>
+          <form onSubmit={handleLogin}>
+            <div style={{ marginBottom: "1rem" }}>
+              <TextInput
+                label="Email"
+                placeholder="Enter your email"
+                value={loginData.email}
+                onChange={handleLoginDataChange}
+                name="email"
+              />
+            </div>
+            <div style={{ marginBottom: "1rem" }}>
+              <TextInput
+                label="Password"
+                placeholder="Enter your password"
+                type="password"
+                value={loginData.password}
+                onChange={handleLoginDataChange}
+                name="password"
+              />
+            </div>
+            <Button variant="outline" color="blue" type="submit">
+              Sign In
+            </Button>
+          </form>
           <p
             style={{
               marginTop: "1rem",
@@ -322,37 +337,39 @@ export default function HeaderResponsive({ links }) {
           title="Sign Up"
           size="xs"
         >
-          <div style={{ marginBottom: "1rem" }}>
-            <TextInput
-              label="Email"
-              placeholder="Enter your email"
-              value={signupData.email}
-              onChange={handleSignupDataChange}
-              name="email"
-            />
-          </div>
-          <div style={{ marginBottom: "1rem" }}>
-            <TextInput
-              label="Password"
-              placeholder="Enter your password"
-              type="password"
-              value={signupData.password}
-              onChange={handleSignupDataChange}
-              name="password"
-            />
-          </div>
-          <div style={{ marginBottom: "1rem" }}>
-            <TextInput
-              label="Name"
-              placeholder="Enter your name"
-              value={signupData.name}
-              onChange={handleSignupDataChange}
-              name="name"
-            />
-          </div>
-          <Button variant="outline" color="blue" onClick={handleSignup}>
-            Sign Up
-          </Button>
+          <form onSubmit={handleSignup}>
+            <div style={{ marginBottom: "1rem" }}>
+              <TextInput
+                label="Email"
+                placeholder="Enter your email"
+                value={signupData.email}
+                onChange={handleSignupDataChange}
+                name="email"
+              />
+            </div>
+            <div style={{ marginBottom: "1rem" }}>
+              <TextInput
+                label="Password"
+                placeholder="Enter your password"
+                type="password"
+                value={signupData.password}
+                onChange={handleSignupDataChange}
+                name="password"
+              />
+            </div>
+            <div style={{ marginBottom: "1rem" }}>
+              <TextInput
+                label="Name"
+                placeholder="Enter your name"
+                value={signupData.name}
+                onChange={handleSignupDataChange}
+                name="name"
+              />
+            </div>
+            <Button variant="outline" color="blue" type="submit">
+              Sign Up
+            </Button>
+          </form>
           <p
             style={{
               marginTop: "1rem",
