@@ -1,7 +1,7 @@
 describe("Navigation", () => {
   it("should add items to cart and from cart go to checkout", () => {
     // Start from the index page
-    cy.visit("http://localhost:3000/");
+    cy.visit("https://store-frontend-aegisnull.vercel.app");
 
     // Add an item to cart
     cy.get(

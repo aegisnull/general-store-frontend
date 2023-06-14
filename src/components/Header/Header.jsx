@@ -287,6 +287,7 @@ export default function HeaderResponsive({ links }) {
               <TextInput
                 label="Email"
                 placeholder="Enter your email"
+                className="login-email-input"
                 value={loginData.email}
                 onChange={handleLoginDataChange}
                 name="email"
@@ -296,13 +297,19 @@ export default function HeaderResponsive({ links }) {
               <TextInput
                 label="Password"
                 placeholder="Enter your password"
+                className="login-password-input"
                 type="password"
                 value={loginData.password}
                 onChange={handleLoginDataChange}
                 name="password"
               />
             </div>
-            <Button variant="outline" color="blue" type="submit">
+            <Button
+              variant="outline"
+              color="blue"
+              type="submit"
+              className="login-submit-button"
+            >
               Sign In
             </Button>
           </form>
