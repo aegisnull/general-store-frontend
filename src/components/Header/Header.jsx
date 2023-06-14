@@ -119,7 +119,11 @@ export default function HeaderResponsive({ links }) {
   const [isLoginModalOpen, setLoginModalOpen] = useState(false);
   const [isSignupModalOpen, setSignupModalOpen] = useState(false);
 
-  const [loginData, setLoginData] = useState({ email: "", password: "" });
+  const [loginData, setLoginData] = useState({
+    email: "",
+    password: "",
+  });
+
   const [signupData, setSignupData] = useState({
     email: "",
     password: "",
@@ -128,7 +132,10 @@ export default function HeaderResponsive({ links }) {
 
   function handleLoginDataChange(event) {
     const { name, value } = event.target;
-    setLoginData((prevData) => ({ ...prevData, [name]: value }));
+    setLoginData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
   }
 
   function handleSignupDataChange(event) {
@@ -150,9 +157,9 @@ export default function HeaderResponsive({ links }) {
     }
   }
 
-  async function handleSignup(email, password, name) {
+  async function handleSignup(signupData) {
     try {
-      const user = await signup(email, password, name);
+      const user = await signup(signupData);
       console.log("Signed up:", user);
       // Additional logic for successful signup
     } catch (error) {
@@ -162,18 +169,12 @@ export default function HeaderResponsive({ links }) {
   }
 
   function toggleLoginModal() {
-    setLoginModalOpen((prev) => !prev);
+    setLoginModalOpen(!isLoginModalOpen);
   }
 
   function toggleSignupModal() {
-    setSignupModalOpen((prev) => !prev);
+    setSignupModalOpen(!isSignupModalOpen);
   }
-
-  const openLoginModal = () => setLoginModalOpen(true);
-  const closeLoginModal = () => setLoginModalOpen(false);
-
-  const openSignupModal = () => setSignupModalOpen(true);
-  const closeSignupModal = () => setSignupModalOpen(false);
 
   const items = links.map((link) => (
     <Link
@@ -191,18 +192,18 @@ export default function HeaderResponsive({ links }) {
     </Link>
   ));
 
-  const handleCartToggle = () => {
+  function handleCartToggle() {
     if (!opened) {
       setCartOpen(!isCartOpen);
     }
-  };
+  }
 
-  const handleMobileToggle = () => {
+  function handleMobileToggle() {
     toggle();
     if (isCartOpen) {
       setCartOpen(false);
     }
-  };
+  }
 
   return (
     <Header height={HEADER_HEIGHT} className={classes.root}>
@@ -245,7 +246,7 @@ export default function HeaderResponsive({ links }) {
           </ActionIcon>
 
           {/* Open the login modal on login button click */}
-          <Button variant="outline" color="blue" onClick={openLoginModal}>
+          <Button variant="outline" color="blue" onClick={toggleLoginModal}>
             Login
           </Button>
           <Group spacing={5} className={classes.links}>
@@ -264,7 +265,7 @@ export default function HeaderResponsive({ links }) {
         {/* Modal component for login */}
         <Modal
           opened={isLoginModalOpen}
-          onClose={closeLoginModal}
+          onClose={toggleLoginModal}
           title="Login"
           size="xs"
         >
@@ -306,8 +307,8 @@ export default function HeaderResponsive({ links }) {
                 fontSize: "0.8rem",
               }}
               onClick={() => {
-                closeLoginModal();
-                openSignupModal();
+                toggleLoginModal();
+                toggleSignupModal();
               }}
             >
               Sign Up
@@ -317,7 +318,7 @@ export default function HeaderResponsive({ links }) {
         {/* Modal component for signup */}
         <Modal
           opened={isSignupModalOpen}
-          onClose={closeSignupModal}
+          onClose={toggleSignupModal}
           title="Sign Up"
           size="xs"
         >
@@ -368,8 +369,8 @@ export default function HeaderResponsive({ links }) {
                 fontSize: "0.8rem",
               }}
               onClick={() => {
-                closeSignupModal();
-                openLoginModal();
+                toggleSignupModal();
+                toggleLoginModal();
               }}
             >
               Login
