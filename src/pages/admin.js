@@ -174,6 +174,7 @@ function AdminPage() {
                     fullWidth
                     variant="outline"
                     color="red"
+                    className="delete-button"
                     style={{ marginTop: "1rem" }}
                     onClick={() => handleDelete(product)}
                   >
@@ -240,7 +241,9 @@ function AdminPage() {
               <Text>
                 Are you sure you want to delete {selectedProduct.name}?
               </Text>
-              <Button onClick={handleDeleteConfirm}>Delete</Button>
+              <Button onClick={handleDeleteConfirm} className="confirm-delete">
+                Delete
+              </Button>
             </div>
           </Modal>
 
@@ -250,12 +253,37 @@ function AdminPage() {
             onClose={() => setAddModalOpen(false)}
           >
             <form onSubmit={handleAddSubmit}>
-              <TextInput label="Name" name="name" required />
-              <TextInput label="Image URL" name="image" required />
-              <TextInput label="Price" name="price" required />
-              <TextInput label="Description" name="description" required />
+              <TextInput
+                label="Name"
+                name="name"
+                className="new-product-name"
+                required
+              />
+              <TextInput
+                label="Image URL"
+                name="image"
+                className="new-product-image"
+                required
+              />
+              <TextInput
+                label="Price"
+                name="price"
+                className="new-product-price"
+                required
+              />
+              <TextInput
+                label="Description"
+                name="description"
+                className="new-product-description"
+                required
+              />
 
-              <Button type="submit" color="blue" style={{ marginTop: "1rem" }}>
+              <Button
+                type="submit"
+                color="blue"
+                className="new-product-submit"
+                style={{ marginTop: "1rem" }}
+              >
                 Add Product
               </Button>
             </form>

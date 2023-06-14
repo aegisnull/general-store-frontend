@@ -269,7 +269,7 @@ export default function HeaderResponsive({ links }) {
           <Group spacing={5} className={classes.links}>
             {loginStatus && (
               <Link href="/admin">
-                <Button variant="outline" color="blue">
+                <Button variant="outline" color="blue" className="admin-button">
                   Admin
                 </Button>
               </Link>
