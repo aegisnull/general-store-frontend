@@ -121,6 +121,7 @@ export default function ShoppingCartSidebar({ isOpen, toggleCart }) {
                       size="xs"
                       onClick={() => handleDecreaseCount(itemName)}
                       disabled={itemQuantity === 1}
+                      className="shopping-cart__decrease-count"
                       style={{ marginRight: "0.5rem" }}
                     >
                       <IconMinus size={16} />
@@ -132,6 +133,7 @@ export default function ShoppingCartSidebar({ isOpen, toggleCart }) {
                       variant="outline"
                       color="gray"
                       size="xs"
+                      className="shopping-cart__increase-count"
                       onClick={() => handleIncreaseCount(itemName)}
                       style={{ marginRight: "0.5rem" }}
                     >
@@ -142,6 +144,7 @@ export default function ShoppingCartSidebar({ isOpen, toggleCart }) {
                       color="red"
                       size="xs"
                       style={{ marginRight: "0.5rem" }}
+                      className="shopping-cart__remove-item"
                       onClick={() => {
                         setItemName(itemName);
                         setIsModalOpen(true);
@@ -174,6 +177,7 @@ export default function ShoppingCartSidebar({ isOpen, toggleCart }) {
         opened={isModalOpen}
         onClose={() => setIsModalOpen(false)}
         title="Confirm Delete"
+        className="shopping-cart__modal"
         size="sm"
       >
         <Text>Are you sure you want to remove this item from your cart?</Text>
