@@ -65,7 +65,7 @@ npm run cypress
 
 The testing coverage is as follows:
 
-Global: 43.83%
+Global: 40.27%
 
 - components/Features: 100%
 - components/Hero: 100%
@@ -75,7 +75,7 @@ Global: 43.83%
 
 - contexts/CartContext: 26.66%
 
-- pages/checkout: 51.61%
+- pages/checkout: 47.05%
 - pages/index: 88.88%
 
 ## Repository 📂

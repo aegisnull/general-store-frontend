@@ -58,10 +58,15 @@ export default function FeaturesCards() {
       padding="xl"
     >
       <feature.icon size={rem(50)} stroke={1} color={theme.fn.primaryColor()} />
-      <Text fz="lg" fw={500} className={classes.cardTitle} mt="md">
+      <Text
+        fz="lg"
+        fw={500}
+        className={`${classes.cardTitle} features__title`}
+        mt="md"
+      >
         {feature.title}
       </Text>
-      <Text fz="sm" c="dimmed" mt="sm">
+      <Text fz="sm" c="dimmed" mt="sm" className="features__description">
         {feature.description}
       </Text>
     </Card>
