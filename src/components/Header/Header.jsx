@@ -183,7 +183,7 @@ export default function HeaderResponsive({ links }) {
     <Link
       href={link.link}
       key={link.label}
-      className={cx(classes.link, {
+      className={cx(classes.link, "header__link", {
         [classes.linkActive]: active === link.link,
       })}
       onClick={() => {
@@ -212,7 +212,7 @@ export default function HeaderResponsive({ links }) {
     <Header height={HEADER_HEIGHT} className={classes.root}>
       <Container className={classes.header}>
         <Link href="/">
-          <MantineLogo size={28} />
+          <MantineLogo size={28} className="header__logo" />
         </Link>
         <Group spacing={5} className={classes.links}>
           {items}
@@ -240,7 +240,7 @@ export default function HeaderResponsive({ links }) {
             color="blue"
             aria-label="Open Shopping Cart"
           >
-            <IconShoppingCart size={26} />
+            <IconShoppingCart size={26} className="header__cart" />
             {cartItems === undefined ? null : (
               <Badge color="red" size="xs" position="top-right">
                 {cartItems.length}
@@ -261,7 +261,7 @@ export default function HeaderResponsive({ links }) {
               variant="outline"
               color="blue"
               onClick={toggleLoginModal}
-              className="login-button"
+              className="login-button header__login"
             >
               Login
             </Button>
@@ -269,7 +269,11 @@ export default function HeaderResponsive({ links }) {
           <Group spacing={5} className={classes.links}>
             {loginStatus && (
               <Link href="/admin">
-                <Button variant="outline" color="blue" className="admin-button">
+                <Button
+                  variant="outline"
+                  color="blue"
+                  className="admin-button header__admin"
+                >
                   Admin
                 </Button>
               </Link>
@@ -288,7 +292,7 @@ export default function HeaderResponsive({ links }) {
           title="Login"
           size="xs"
         >
-          <form onSubmit={handleLogin}>
+          <form onSuabmit={handleLogin}>
             <div style={{ marginBottom: "1rem" }}>
               <TextInput
                 label="Email"
