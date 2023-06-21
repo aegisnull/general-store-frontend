@@ -291,6 +291,7 @@ export default function HeaderResponsive({ links }) {
           onClose={toggleLoginModal}
           title="Login"
           size="xs"
+          className="header__login-modal"
         >
           <form onSuabmit={handleLogin}>
             <div style={{ marginBottom: "1rem" }}>
@@ -353,6 +354,7 @@ export default function HeaderResponsive({ links }) {
           onClose={toggleSignupModal}
           title="Sign Up"
           size="xs"
+          className="header__signup-modal"
         >
           <form onSubmit={handleSignup}>
             <div style={{ marginBottom: "1rem" }}>

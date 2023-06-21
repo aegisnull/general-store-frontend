@@ -65,4 +65,20 @@ describe("Header", () => {
     expect(cartIcon).toBeInTheDocument();
     expect(loginButton).toBeInTheDocument();
   });
+
+  test("login modal should exist", () => {
+    //  Arrange
+    const loginModal = document.querySelector(".header__login-modal");
+
+    // Assert
+    expect(loginModal).toBeInTheDocument();
+  });
+
+  test("signup modal should exist", () => {
+    //  Arrange
+    const signupModal = document.querySelector(".header__signup-modal");
+
+    // Assert
+    expect(signupModal).toBeInTheDocument();
+  });
 });
