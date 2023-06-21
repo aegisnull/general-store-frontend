@@ -65,18 +65,31 @@ npm run cypress
 
 The testing coverage is as follows:
 
-Global: 40.27%
-
-- components/Features: 100%
-- components/Hero: 100%
-- components/ProductCard: 33.33%
-- components/ProductDisplay: 57.69%
-- components/ShoppingCart: 11.11%
-
-- contexts/CartContext: 26.66%
-
-- pages/checkout: 47.05%
-- pages/index: 88.88%
+| File                      | % Stmts | % Branch | % Funcs | % Lines | Uncovered Line #s            |
+| ------------------------- | ------- | -------- | ------- | ------- | ---------------------------- |
+| All files                 | 48.41   | 37.5     | 33.8    | 49.36   |
+| api                       | 9.75    | 0        | 0       | 10.25   |
+| orders.js                 | 17.64   | 100      | 0       | 20      | 5-17,22-28                   |
+| users.js                  | 4.16    | 0        | 0       | 4.16    | 4-57                         |
+| components/Features       | 100     | 50       | 100     | 100     |
+| Features.jsx              | 100     | 50       | 100     | 100     | 34                           |
+| components/Footer         | 100     | 50       | 100     | 100     |
+| Footer.jsx                | 100     | 50       | 100     | 100     | 14                           |
+| components/Header         | 45.76   | 33.33    | 17.64   | 46.42   |
+| Header.jsx                | 45.76   | 33.33    | 17.64   | 46.42   | 137-179,190-407              |
+| components/Hero           | 100     | 100      | 100     | 100     |
+| Hero.jsx                  | 100     | 100      | 100     | 100     |
+| components/ProductCard    | 57.14   | 100      | 50      | 57.14   |
+| ProductCard.jsx           | 57.14   | 100      | 50      | 57.14   | 14-20                        |
+| components/ProductDisplay | 81.81   | 100      | 66.66   | 81.81   |
+| ProductDisplay.jsx        | 81.81   | 100      | 66.66   | 81.81   | 19,27-28,46                  |
+| components/ShoppingCart   | 48.88   | 61.53    | 37.5    | 50      |
+| ShoppingCart.jsx          | 48.88   | 61.53    | 37.5    | 50      | 22-46,56,122-184             |
+| contexts                  | 38.09   | 100      | 0       | 43.75   |
+| CartContext.js            | 26.66   | 100      | 0       | 27.27   | 6-19                         |
+| UserContext.js            | 66.66   | 100      | 0       | 80      | 6                            |
+| pages                     | 47.05   | 20       | 27.27   | 48.48   |
+| checkout.js               | 47.05   | 20       | 27.27   | 48.48   | 16-17,21-23,27-50,91,112-122 |
 
 ## Repository 📂
 
