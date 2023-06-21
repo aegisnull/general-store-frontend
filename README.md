@@ -67,7 +67,7 @@ The testing coverage is as follows:
 
 | File                      | % Stmts | % Branch | % Funcs | % Lines | Uncovered Line #s            |
 | ------------------------- | ------- | -------- | ------- | ------- | ---------------------------- |
-| All files                 | 48.41   | 37.5     | 33.8    | 49.36   |
+| All files                 | 50.18   | 39.02    | 35.52   | 51      |
 | api                       | 9.75    | 0        | 0       | 10.25   |
 | orders.js                 | 17.64   | 100      | 0       | 20      | 5-17,22-28                   |
 | users.js                  | 4.16    | 0        | 0       | 4.16    | 4-57                         |
@@ -76,15 +76,17 @@ The testing coverage is as follows:
 | components/Footer         | 100     | 50       | 100     | 100     |
 | Footer.jsx                | 100     | 50       | 100     | 100     | 14                           |
 | components/Header         | 45.76   | 33.33    | 17.64   | 46.42   |
-| Header.jsx                | 45.76   | 33.33    | 17.64   | 46.42   | 137-179,190-407              |
+| Header.jsx                | 45.76   | 33.33    | 17.64   | 46.42   | 137-179,190-409              |
 | components/Hero           | 100     | 100      | 100     | 100     |
 | Hero.jsx                  | 100     | 100      | 100     | 100     |
+| components/OrderHistory   | 80      | 100      | 60      | 78.57   |
+| OrderHistory.js           | 80      | 100      | 60      | 78.57   | 14,38-51                     |
 | components/ProductCard    | 57.14   | 100      | 50      | 57.14   |
 | ProductCard.jsx           | 57.14   | 100      | 50      | 57.14   | 14-20                        |
 | components/ProductDisplay | 81.81   | 100      | 66.66   | 81.81   |
 | ProductDisplay.jsx        | 81.81   | 100      | 66.66   | 81.81   | 19,27-28,46                  |
 | components/ShoppingCart   | 48.88   | 61.53    | 37.5    | 50      |
-| ShoppingCart.jsx          | 48.88   | 61.53    | 37.5    | 50      | 22-46,56,122-184             |
+| ShoppingCart.jsx          | 48.88   | 61.53    | 37.5    | 50      | 22-46,56,122-188             |
 | contexts                  | 38.09   | 100      | 0       | 43.75   |
 | CartContext.js            | 26.66   | 100      | 0       | 27.27   | 6-19                         |
 | UserContext.js            | 66.66   | 100      | 0       | 80      | 6                            |
